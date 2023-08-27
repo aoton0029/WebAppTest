@@ -1,11 +1,46 @@
-table {
-    background-color: #ffe;
-    border-collapse: collapse;
-  }
-  table th {
-    background-color: #eee;
-  }
-  table th, table td {
-    border: solid 1px #aaa;
-    padding:15px;
-  }
+table.main_grid{
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	table-layout: fixed;
+}
+table.main_grid th{
+	border: 1px solid #999;
+	padding: 5px;
+	font-weight: normal;
+	background: #e0ecf9;
+	color: #3366cc;
+	text-align: center;
+}
+table.main_grid td{
+	border: 1px solid #999;
+	padding: 5px;
+  	vertical-align: top;
+}
+
+table.sub_grid{
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	table-layout: fixed;
+}
+table.sub_grid th{
+	border: 1px solid #999;
+	padding: 5px;
+	font-weight: normal;
+	background: #e0f9f3;
+	color: #33cc80;
+	text-align: center;
+}
+table.sub_grid td{
+	border: 1px solid #999;
+	padding: 5px;
+	text-align: center;
+	word-wrap: break-word;
+}
+
+h2 {
+	border-bottom: solid 3px #27acd9;
+	padding: 10px 0;
+}
+

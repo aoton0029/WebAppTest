@@ -1,0 +1,30 @@
+#header-menu .menu:first-child {
+    margin-left: 15px;
+}
+
+#header-menu {
+    height: 50px;
+    background-color: #f4f4f4;
+    width: 100%;
+    position: fixed;
+    top: 60px;
+    transition: top .3s;
+    z-index: 400;
+    display: flex;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+#header-menu .menu {
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 10px;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: #4ea6cc;
+}
+.r10M {
+    margin-right: 10px !important;
+}

@@ -1,19 +1,24 @@
 <!DOCTYPE html>
+{% extends 'base.html' %}
+{% block main %}
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <title>サンプル</title>
-    <link rel="stylesheet" href="grid.css">
+    <link rel="stylesheet" href="/static/css/grid.css">
 </head>
-<script type="text/javascript">
-
-</script>
+<script type="text/javascript"></script>
 
 <body>
-    <table id='grid' class="main_grid">
-        
-    </table>
-</body>
+    <div id="header">
+        <h2>テスト</h2>
+    </div>
+    <div>
+        <table id='grid' class="main_grid">
 
-<script type="text/javascript" src="grid.js"></script>
+        </table>
+    </div>
+</body>
+<script type="text/javascript" src="/static/js/grid.js"></script>
 </html>
+{% endblock %}
