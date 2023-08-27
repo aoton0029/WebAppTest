@@ -44,3 +44,17 @@ h2 {
 	padding: 10px 0;
 }
 
+.flex{
+    display: flex;
+    border: 1px solid #333;
+}
+.flex div{
+    border: 1px solid #333;
+    background: #CCC;
+}
+.right{
+    width: 20%;
+}
+.left{
+    width: 80%;
+}
