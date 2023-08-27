@@ -25,6 +25,15 @@ a:link, a:visited {
     text-decoration: none;
     color: #4ea6cc;
 }
+
 .r10M {
     margin-right: 10px !important;
+}
+
+.dropdown ul li ul{
+    display: none;
+}
+
+.dropdown ul li:hover ul{
+    display: block;
 }
