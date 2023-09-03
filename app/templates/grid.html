@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 {% extends 'base.html' %}
 {% block main %}
 <html lang="ja">
@@ -6,8 +5,8 @@
     <meta charset="UTF-8">
     <title>サンプル</title>
     <link rel="stylesheet" href="/static/css/grid.css">
+    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
 </head>
-<script type="text/javascript"></script>
 
 <body>
     <div id="header">
@@ -19,27 +18,13 @@
             </table>
         </div>
         <div class="item">
-            <div class="layer js-modal">
-                <div class="modal">
-                  <div class="modal__inner">
-                    <div class="modal__button-wrap">
-                      <button class="close-button js-close-button">
-                        <span></span>
-                        <span></span>
-                      </button>
-                    </div>
-                    <div class="modal__contents">
-                      <div class="modal__content">
-                        コンテンツが入ります。コンテンツが入ります。コンテンツが入ります。コンテンツが入ります。コンテンツが入ります。コンテンツが入ります。
-                      </div>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <button class="button js-modal-button">モーダルボタン</button>
+
         </div>
     </div>
+<div id="wrapper"></div>
 </body>
+
+<script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
 <script type="text/javascript" src="/static/js/grid.js"></script>
 </html>
 {% endblock %}

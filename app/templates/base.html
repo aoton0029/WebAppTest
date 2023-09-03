@@ -4,40 +4,11 @@
         <title>Flask lesson</title>
         <link rel="stylesheet" href="/static/css/base.css">
     </head>
+    <header>
+        <hr>
+        <div><h1>HEADER</h1></div>
+    </header>
     <body>
-        <header>
-            <div id="header-menu">
-              <a href="{{ url_for('get_grid') }}" class="menu r10M">
-                <span class="icon release"></span>
-                <span class="text">新刊ニュース</span>
-              </a>
-              <a href="/ranking" class="menu r10M">
-                <span class="icon ranking"></span>
-                <span class="text">ランキング</span>
-              </a>
-              <a href="/booklists" class="menu r10M">
-                <span class="icon booklist"></span>
-                <span class="text">ブックリスト</span>
-              </a>
-              <a href="/questions/all" class="menu r10M">
-                <span class="bbs icon"></span>
-                <span class="text">談話室</span>
-              </a>
-              <a href="/hon" class="menu r10M">
-                <span class="news icon"></span>
-                <span class="text">ブクログ通信</span>
-              </a>
-              <div class="dropdown-menu-hover menu">
-                <span class="support icon"></span>
-                <div class="dropdown">
-                  <ul>
-                    <li><a href="/contact">お問い合わせ</a></li>
-                    <li><a href="/biz">法人向け広告メニュー</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-        </header>
 {% block main %}
 {% endblock %}
     <footer>

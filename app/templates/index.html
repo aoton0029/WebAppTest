@@ -1,12 +1,35 @@
 <!DOCTYPE html>
 {% extends 'base.html' %}
 {% block main %}
-<html>
- <head>
-  <title>タイトル</title>
- </head>
- <body>
-  <a href="index.html">XXX</a>
- </body>
+<html lang="en">
+  <head>
+    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet"/>
+     <link rel="stylesheet" href="/static/css/index.css">
+  </head>
+  <body>
+    <ul class="sample1">
+      <li>
+        <a href="{{ url_for('headers')}}">ヘッダ</a>
+      </li>
+      <li>
+        <a href="{{ url_for('flow')}}">フロー</a>
+      </li>
+      <li>
+        <a href="{{ url_for('button')}}">ボタン</a>
+      </li>
+      <li>
+        <a href="{{ url_for('radiobtn')}}">rラジオボタン</a>
+      </li>
+      <li>
+        <a href="{{ url_for('get_grid')}}">グリッド</a>
+      </li>
+    </ul>
+    <div class="box">
+      <span class="label blue">Blue</span>
+      <p>色を変える</p>
+      <p>肯定系</p>
+    </div>
+  </body>
+  <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
 </html>
 {% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block main %}
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>サンプル</title>
+    <link rel="stylesheet" href="/static/css/grid.css">
+</head>
+
+<body>
+     <!-- Header Start -->
+    <header class="site-header">
+      <div class="wrapper site-header__wrapper">
+        <div class="site-header__start">
+          <a href="#" class="brand">Brand</a>
+        </div>
+        <div class="site-header__middle">
+          <nav class="nav">
+            <button class="nav__toggle" aria-expanded="false" type="button">
+              menu
+            </button>
+            <ul class="nav__wrapper">
+              <li class="nav__item"><a href="#">Home</a></li>
+              <li class="nav__item"><a href="#">About</a></li>
+              <li class="nav__item"><a href="#">Services</a></li>
+              <li class="nav__item"><a href="#">Hire us</a></li>
+              <li class="nav__item"><a href="#">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="site-header__end">
+          <a class="button" href="#">Sign in</a>
+        </div>
+      </div>
+    </header>
+    <!-- Header End -->
+</body>
+
+</html>
+{% endblock %}

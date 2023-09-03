@@ -1,0 +1,82 @@
+.box1 {
+    margin:2em auto;
+    padding:2em;/*内側余白*/
+    border:solid 2px #A5A19A;/*線の種類・太さ・色*/
+}
+
+.box {
+  background:white;
+  margin: 4em auto;
+  border: 2px solid #ddd;
+  border-radius: 0 5px 5px;
+  padding: 1em;
+  position: relative;
+  font-size: 0.95em;
+  width: auto;
+  max-width: 600px;
+
+  .label {
+    display: inline-block;
+    position: absolute;
+    border-radius: 5px 5px 0 0;
+    padding: 0 1em;
+    width: auto;
+    height: 2em;
+    line-height: 2em;
+    top: -2em;
+    left: -2px;
+    font-weight: bold;
+    background: #ddd;
+
+    &.red{
+      background:#ff6677;
+      color:white;
+    }
+    &.blue{
+      background:#6699ff;
+      color:white;
+    }
+    &.yellow{
+      background:#ffdd00;
+    }
+  }
+
+  > p:not(:last-child) {
+    padding-bottom: 1em;
+  }
+}
+
+ol.sample1{
+  counter-reset:list;
+  list-style-type:none;
+  font: 14px/1.6 'arial narrow', sans-serif;
+  padding: 0px;
+  border: solid 1px #F6A38B;
+}
+
+ol.sample1 li{
+  position:relative;
+  line-height: 30px;
+  margin: 7px 0 7px 40px;
+  padding-left: 10px;
+  font-weight: bold;
+  font-size:14px;
+}
+
+ol.sample1 li:before{
+  counter-increment: list;
+  content: counter(list);
+  position: absolute;
+  left: -35px;
+  width: 30px;
+  height: 30px;
+  background: #F6A38B;
+  text-align: center;
+  color: #fff;
+  top: 50%;
+  -moz-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}

@@ -1,6 +1,7 @@
 import flask
 from flask import Flask, render_template, jsonify, request, g
 import pandas as pd
+import logging
 import json
 
 app = Flask(__name__)
@@ -11,16 +12,25 @@ datas = pd.DataFrame(
           '着手計画日': ['2023/08/23', '2023/08/23', '2023/08/23', '2023/08/23']}
 )
 
-@app.route("/")
-@app.route("/index")
+@app.route("/", methods=['GET', 'POST'])
 def index():
     return render_template("index.html")
 
+@app.route("/headers", methods=['GET','POST'])
+def headers():
+    return render_template("headers.html")
 
-@app.route("/index", methods=["post"])
-def post():
-    return render_template("index.html")
+@app.route("/radiobtn", methods=['GET','POST'])
+def radiobtn():
+    return render_template("radiobtn.html")
 
+@app.route("/flow", methods=['GET','POST'])
+def flow():
+    return render_template("flow.html")
+
+@app.route("/button", methods=['GET','POST'])
+def button():
+    return render_template("button.html")
 
 @app.route("/grid", methods=['GET'])
 def get_grid():
@@ -33,9 +43,7 @@ def post_grid():
         print(request.headers['Content-Type'])
         return flask.jsonify(res='error'), 400
     return flask.jsonify(res='ok')
-    #print(new_value)
-    #print(request.path)
-    #return jsonify(values=json.dumps(new_value))
+
 
 if __name__ == "__main__":
     app.run(debug=True)
