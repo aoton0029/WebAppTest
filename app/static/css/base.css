@@ -1,1 +1,39 @@
+/* ベースの本体 */
+#loading::after {
+  content:'';
+  border:5px solid #ff0000ff;
+  border-right-color: #ff000055;
+  border-top-color: #ff000055;
+  border-radius:50%;
+  width:70px;
+  height:70px;
+  position:absolute;
+  z-index:9999;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  animation: loader 0.5s linear infinite;
+}
+#loading.loaded {
+  opacity: 0 !important;
+}
 
+#loading {
+  width:100%;
+  height:100%;
+  position:fixed;
+  z-index:9998;
+  background-color:#ccf;
+  opacity:1;
+  transition:opacity 1s linear;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0);
+  }
+ 
+  100% {
+    transform: rotate(360deg);
+  }
+}

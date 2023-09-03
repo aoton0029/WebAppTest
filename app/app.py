@@ -32,6 +32,11 @@ def flow():
 def button():
     return render_template("button.html")
 
+@app.route("/modal", methods=['GET'])
+def modal():
+    return render_template("modal.html")
+
+
 @app.route("/grid", methods=['GET'])
 def get_grid():
     return render_template("grid.html")

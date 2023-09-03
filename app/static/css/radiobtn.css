@@ -38,40 +38,41 @@ group + group {
   border-radius: 3px;
   overflow: hidden;
   border: 1px solid #b6b6b6;
+}
 
 
-  div {
-    position: relative;
-    flex: 1;
-  }
 
-  input {
-    width: 100%;
-    height: 60px;
-    opacity: 0;
-  }
+.inline-radio div {
+  position: relative;
+  flex: 1;
+}
 
-  label {
-    position: absolute;
-    top: 0; left: 0;
-    color: #b6b6b6;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-    border-right: 1px solid #b6b6b6;
-  }
+.inline-radio input {
+  width: 100%;
+  height: 60px;
+  opacity: 0;
+}
 
-  div:last-child label {
-    border-right: 0;
-  }
+.inline-radio label {
+  position: absolute;
+  top: 0; left: 0;
+  color: #b6b6b6;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  border-right: 1px solid #b6b6b6;
+}
 
-  input:checked + label {
-    background: #d81b60;
-    font-weight: 500;
-    color: #fff;
-  }
+.inline-radio div:last-child label {
+  border-right: 0;
+}
+
+.inline-radio input:checked + label {
+  background: #d81b60;
+  font-weight: 500;
+  color: #fff;
 }
