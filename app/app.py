@@ -1,5 +1,5 @@
 import flask
-from flask import Flask, render_template, jsonify, request, g
+from flask import Flask, render_template, jsonify, request, g, redirect, url_for
 import pandas as pd
 import logging
 import json
@@ -48,6 +48,20 @@ def post_grid():
         print(request.headers['Content-Type'])
         return flask.jsonify(res='error'), 400
     return flask.jsonify(res='ok')
+
+@app.route("/list/", methods=['GET'])
+def get_list():
+    return render_template("list.html", linename='B')
+
+@app.route("/list%<lname>", methods=['GET'])
+def switch_list(lname=None):
+    ln = lname if lname==None else 'TEST'
+    ln = f'{ln}{lname}'
+    print(ln)
+    if('B' in ln):
+        print('redirect')
+        return redirect(url_for('get_list', linename=ln))
+    return render_template("list.html", linename=ln)
 
 
 if __name__ == "__main__":

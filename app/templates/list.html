@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block main %}
+<html lang="js">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<script type="text/javascript">
+    var data = {{linename|tojson}}
+</script>
+</head>
+<body>
+  <select id="linelist">
+    <option value="A">AAAAA</option>
+    <option value="B">BBBBB</option>
+    <option value="C">CCCCC</option>
+    <option value="D">DDDDD</option>
+    <option value="E">EEEEE</option>
+  </select>
+
+</body>
+</html>
+<script type="text/javascript" src="{{ url_for('static', filename='js/list.js') }}"></script>
+{% endblock %}
