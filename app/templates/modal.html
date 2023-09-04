@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block main %}
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>サンプル</title>
+    <link rel="stylesheet" href="/static/css/modal.css">
+</head>
+<body>
+    <label class="my_modal_btn" for="my_modal1">モーダルを表示</label><!-- チェックボックスラベル -->
+    <input type="checkbox" id="my_modal1"><!-- 非表示チェックボックス -->
+    <label class="my_modal_overlay" for="my_modal1"></label><!-- オーバーレイ -->
+    <div class="my_modal_body1">
+        <div class="my_modal_header">
+            タイトル
+            <label class="my_modal_close" for="my_modal1"><div class="my_modal_close_icon"><span></span></div></label><!-- 閉じるボタン -->
+        </div>
+        <div class="my_modal_content">
+            <!-- モーダル内コンテンツ -->
+            <ul>
+                <li>コンテンツ1</li>
+                <li>コンテンツ2</li>
+                <li>コンテンツ3</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
