@@ -2,7 +2,11 @@ import flask
 from flask import Flask, render_template, jsonify, request, g, redirect, url_for
 import pandas as pd
 import logging
+import datetime
+import time
 import json
+from gevent.pywsgi import WSGIServer
+from geventwebsocket.handler import WebSocketHandler
 
 app = Flask(__name__)
 
@@ -63,6 +67,40 @@ def switch_list(lname=None):
         return redirect(url_for('get_list', linename=ln))
     return render_template("list.html", linename=ln)
 
+@app.route("/chat", methods=['GET'])
+def get_chat():
+    return render_template("chat.html", linename='B')
+
+@app.route('/pipe')
+def pipe():
+    print('pipe')
+    if request.environ.get('wsgi.websocket'):
+       ws = request.environ['wsgi.websocket']
+       while True:
+           time.sleep(1)
+           message = ws.receive()
+           if message is None:
+               break
+           datetime_now = datetime.datetime.now()
+           data = {
+               'time': str(datetime_now),
+               'message': message
+           }
+           ws.send(json.dumps(data))
+           print(message)
+           print(data)
+    return
+
 
 if __name__ == "__main__":
+    host = 'localhost'
+    port = 8080
+
+    host_port = (host, port)
+    server = WSGIServer(
+        host_port,
+        app,
+        handler_class=WebSocketHandler
+    )
+    server.serve_forever()
     app.run(debug=True)
