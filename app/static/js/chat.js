@@ -18,3 +18,8 @@ btn.addEventListener('click', function(){
     var msg = document.getElementById('msg');
     ws.send(msg.value);
 });
+
+// https://note.com/shimakaze_soft/n/n99b47eccd915
+//https://bloom-t.co.jp/blog/article_9233/
+//https://blanktar.jp/blog/2014/05/python-gevent-websocket
+//https://qiita.com/shiro-kuma/items/0607e01a19e093fdb631
