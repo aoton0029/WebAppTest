@@ -1,12 +1,10 @@
 import flask
-from flask import Flask, render_template, jsonify, request, g, redirect, url_for
+from flask import Flask, render_template, jsonify, request, g, redirect, send_file, url_for
 import pandas as pd
 import logging
 import datetime
 import time
 import json
-from gevent.pywsgi import WSGIServer
-from geventwebsocket.handler import WebSocketHandler
 
 app = Flask(__name__)
 
@@ -20,6 +18,7 @@ datas = pd.DataFrame(
 def index():
     return render_template("index.html")
 
+    
 @app.route("/headers", methods=['GET','POST'])
 def headers():
     return render_template("headers.html")
@@ -39,7 +38,6 @@ def button():
 @app.route("/modal", methods=['GET'])
 def modal():
     return render_template("modal.html")
-
 
 @app.route("/grid", methods=['GET'])
 def get_grid():
@@ -71,36 +69,10 @@ def switch_list(lname=None):
 def get_chat():
     return render_template("chat.html", linename='B')
 
-@app.route('/pipe')
-def pipe():
-    print('pipe')
-    if request.environ.get('wsgi.websocket'):
-       ws = request.environ['wsgi.websocket']
-       while True:
-           time.sleep(1)
-           message = ws.receive()
-           if message is None:
-               break
-           datetime_now = datetime.datetime.now()
-           data = {
-               'time': str(datetime_now),
-               'message': message
-           }
-           ws.send(json.dumps(data))
-           print(message)
-           print(data)
-    return
+@app.route("/draganddrop", methods=['GET'])
+def draganddrop():
+    return render_template("draganddrop.html")
 
 
-if __name__ == "__main__":
-    host = 'localhost'
-    port = 8080
-
-    host_port = (host, port)
-    server = WSGIServer(
-        host_port,
-        app,
-        handler_class=WebSocketHandler
-    )
-    server.serve_forever()
-    app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=False, host='127.0.0.1', port=80)

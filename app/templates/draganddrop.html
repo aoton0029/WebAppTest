@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drag and Drop Table Rows</title>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+    }
+
+    .drag-handle {
+        cursor: grab;
+    }
+
+    .dragging {
+        opacity: 0.5;
+    }
+
+    .over {
+        background-color: #f0f0f0;
+    }
+</style>
+</head>
+<body>
+    <table id="sortable-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="row">
+                <td class="drag-handle">1</td>
+                <td>John Doe</td>
+                <td>30</td>
+                <td>
+                    <button class="move-up">↑</button>
+                    <button class="move-down">↓</button>
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="drag-handle">2</td>
+                <td>Jane Doe</td>
+                <td>25</td>
+                <td>
+                    <button class="move-up">↑</button>
+                    <button class="move-down">↓</button>
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="drag-handle">3</td>
+                <td>Mike Smith</td>
+                <td>35</td>
+                <td>
+                    <button class="move-up">↑</button>
+                    <button class="move-down">↓</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function handleDragStart(e) {
+            this.style.opacity = "0.4";
+            dragSrcEl = this;
+            e.dataTransfer.effectAllowed = "move";
+            e.dataTransfer.setData("text/html", this.outerHTML);
+        }
+    
+        function handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            //this.style.border = "2px dashed #000";
+            e.dataTransfer.dropEffect = "move";
+            return false;
+        }
+    
+        function handleDragEnter(e) {
+            this.classList.add("over");
+        }
+    
+        function handleDragLeave(e) {
+            this.classList.remove("over");
+        }
+    
+        function handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+            if (dragSrcEl !== this) {
+                dragSrcEl.outerHTML = this.outerHTML;
+                this.outerHTML = e.dataTransfer.getData("text/html");
+            }
+            return false;
+        }
+    
+        function handleDragEnd() {
+            this.classList.remove("over");
+            this.style.border = "none";
+            this.style.opacity = "1";
+            const rows = document.querySelectorAll(".row");
+            rows.forEach(row => {
+                row.addEventListener("dragstart", handleDragStart);
+                row.addEventListener("dragover", handleDragOver);
+                row.addEventListener("dragenter", handleDragEnter);
+                row.addEventListener("dragleave", handleDragLeave);
+                row.addEventListener("drop", handleDrop);
+                row.addEventListener("dragend", handleDragEnd);
+            });
+        }
+    
+        const rows = document.querySelectorAll(".row");
+        rows.forEach(row => {
+            row.setAttribute("draggable", true);
+            row.addEventListener("dragstart", handleDragStart);
+            row.addEventListener("dragover", handleDragOver);
+            row.addEventListener("dragenter", handleDragEnter);
+            row.addEventListener("dragleave", handleDragLeave);
+            row.addEventListener("drop", handleDrop);
+            row.addEventListener("dragend", handleDragEnd);
+        });
+
+        document.querySelectorAll('.move-up').forEach(item => {
+            item.addEventListener('click', function(e) {
+                let row = e.target.parentNode.parentNode;
+                let previousRow = row.previousElementSibling;
+                if (previousRow && previousRow.className === 'row') {
+                    row.parentNode.insertBefore(row, previousRow);
+                }
+            });
+        });
+
+        document.querySelectorAll('.move-down').forEach(item => {
+            item.addEventListener('click', function(e) {
+                let row = e.target.parentNode.parentNode;
+                let nextRow = row.nextElementSibling;
+                if (nextRow) {
+                    row.parentNode.insertBefore(nextRow, row);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
