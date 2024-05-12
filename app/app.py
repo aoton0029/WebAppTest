@@ -1,10 +1,10 @@
 import flask
 from flask import Flask, render_template, jsonify, request, g, redirect, send_file, url_for
+from wtforms import Form, StringField, IntegerField, validators
 import pandas as pd
 import logging
-import datetime
+from datetime import datetime, date, timedelta
 import time
-import json
 
 app = Flask(__name__)
 
@@ -73,6 +73,27 @@ def get_chat():
 def draganddrop():
     return render_template("draganddrop.html")
 
+@app.route("/table1", methods=['GET'])
+def table1():
+    return render_template("table1.html")
 
+@app.route("/table2", methods=['GET'])
+def table2():
+    return render_template("table2.html")
+
+class EmployeeForm(Form):
+    full_name = StringField('Full Name', [validators.Length(min=1, max=50, message="Full Name must be between 1 and 50 characters")])
+    age = IntegerField('Age', [validators.NumberRange(min=18, max=65, message="Age must be between 18 and 65")])
+    job_title = StringField('Job Title', [validators.Length(min=1, max=50, message="Job Title must be between 1 and 50 characters")])
+    location = StringField('Location', [validators.Length(min=1, max=100, message="Location must be between 1 and 100 characters")])
+    
+@app.route('/validate', methods=['POST'])
+def validate():
+    form = EmployeeForm(request.form)
+    if form.validate():
+        return "Validated"
+    else:
+        return "Validation failed"
+   
 if __name__ == '__main__':
     app.run(debug=False, host='127.0.0.1', port=80)

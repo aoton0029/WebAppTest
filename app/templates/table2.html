@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Table V02</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body,
+        html {
+            height: 100%;
+            font-family: sans-serif
+        }
+
+        a {
+            margin: 0;
+            transition: all .4s;
+            -webkit-transition: all .4s;
+            -o-transition: all .4s;
+            -moz-transition: all .4s
+        }
+
+        a:focus {
+            outline: none !important
+        }
+
+        a:hover {
+            text-decoration: none
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0
+        }
+
+        p {
+            margin: 0
+        }
+
+        ul,
+        li {
+            margin: 0;
+            list-style-type: none
+        }
+
+        input {
+            display: block;
+            outline: none;
+            border: none !important
+        }
+
+        textarea {
+            display: block;
+            outline: none
+        }
+
+        textarea:focus,
+        input:focus {
+            border-color: transparent !important
+        }
+
+        button {
+            outline: none !important;
+            border: none;
+            background: 0 0
+        }
+
+        button:hover {
+            cursor: pointer
+        }
+
+        iframe {
+            border: none !important
+        }
+
+        .limiter {
+            width: 100%;
+            margin: 0 auto
+        }
+
+        .container-table100 {
+            width: 100%;
+            min-height: 100vh;
+            background: #c4d3f6;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 33px 30px
+        }
+
+        .wrap-table100 {
+            width: 960px;
+            border-radius: 10px;
+            overflow: hidden
+        }
+
+        .table {
+            width: 100%;
+            display: table;
+            margin: 0
+        }
+
+        
+
+        .row {
+            display: table-row;
+            background: #fff
+        }
+
+        .row.header {
+            color: #fff;
+            background: #6c7ae0
+        }
+
+        .cell {
+            display: table-cell
+        }
+        
+        .row .cell {
+            font-family: Poppins-Regular;
+            font-size: 15px;
+            color: #666;
+            line-height: 1.2;
+            font-weight: unset !important;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f2f2f2
+        }
+
+        .row.header .cell {
+            font-family: Poppins-Regular;
+            font-size: 18px;
+            color: #fff;
+            line-height: 1.2;
+            font-weight: unset !important;
+            padding-top: 19px;
+            padding-bottom: 19px
+        }
+
+        .row .cell:nth-child(1) {
+            width: 360px;
+            padding-left: 40px
+        }
+
+        .row .cell:nth-child(2) {
+            width: 160px
+        }
+
+        .row .cell:nth-child(3) {
+            width: 250px
+        }
+
+        .row .cell:nth-child(4) {
+            width: 190px
+        }
+
+        .table,
+        .row {
+            width: 100% !important
+        }
+
+        .row:hover {
+            background-color: #ececff;
+            cursor: pointer
+        }
+
+        input{
+            border: none;
+            font-size: large;
+            background: transparent;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="limiter">
+        <div class="container-table100">
+            <div class="wrap-table100">
+                <div class="table">
+                    <div class="row header">
+                        <div class="cell">Full Name</div>
+                        <div class="cell">Age</div>
+                        <div class="cell">Job Title</div>
+                        <div class="cell">Location</div>
+                    </div>
+                    <form method="POST" action="/validate">
+                        <div class="row">
+                            <div class="cell" data-title="Full Name">
+                                <input type="text" name="row1_full_name" value="Vincent Williamson">
+                            </div>
+                            <div class="cell" data-title="Age">
+                                <input type="number" name="row1_age" value="31">
+                            </div>
+                            <div class="cell" data-title="Job Title">
+                                <input type="text" name="row1_job_title" value="iOS Developer">
+                            </div>
+                            <div class="cell" data-title="Location">
+                                <input type="text" name="row1_location" value="Washington">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="cell" data-title="Full Name">Joseph Smith</div>
+                            <div class="cell" data-title="Age">27</div>
+                            <div class="cell" data-title="Job Title">Project Manager</div>
+                            <div class="cell" data-title="Location">Somerville, MA</div>
+                        </div>
+                        <div class="row">
+                            <div class="cell" data-title="Full Name">Justin Black</div>
+                            <div class="cell" data-title="Age">26</div>
+                            <div class="cell" data-title="Job Title">Front-End Developer</div>
+                            <div class="cell" data-title="Location">Los Angeles</div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
