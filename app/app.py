@@ -81,6 +81,10 @@ def table1():
 def table2():
     return render_template("table2.html")
 
+@app.route("/table3", methods=['GET'])
+def table3():
+    return render_template("table3.html")
+
 class EmployeeForm(Form):
     full_name = StringField('Full Name', [validators.Length(min=1, max=50, message="Full Name must be between 1 and 50 characters")])
     age = IntegerField('Age', [validators.NumberRange(min=18, max=65, message="Age must be between 18 and 65")])
