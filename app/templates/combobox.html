@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block main %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.options.label }}: {{ form.options() }}
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

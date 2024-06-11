@@ -184,47 +184,63 @@
         }
     </style>
 </head>
+<script>
+    function addRow() {
+        $.ajax({
+            url: '/add_row',
+            type: 'POST',
+            success: function(response) {
+                $('.table').append(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
 
+    function deleteRow(row) {
+        $(row).remove();
+    }
+</script>
 <body>
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>Error:</strong> {{ error }}
+            </div>
+        {% endfor %}
+    {% endfor %}
     <div class="limiter">
         <div class="container-table100">
             <div class="wrap-table100">
-                <div class="table">
-                    <div class="row header">
-                        <div class="cell">Full Name</div>
-                        <div class="cell">Age</div>
-                        <div class="cell">Job Title</div>
-                        <div class="cell">Location</div>
-                    </div>
-                    <form method="POST" action="/validate">
+                <form method="POST" action="/validate">
+                    {{ form.csrf_token }}
+                    <input type="submit" value="Submit">
+                    <div class="table">
+                        <div class="row header">
+                            <div class="cell">Full Name</div>
+                            <div class="cell">Age</div>
+                            <div class="cell">Job Title</div>
+                            <div class="cell">Location</div>
+                        </div>
+                        {% for employee in form.employees %}
                         <div class="row">
                             <div class="cell" data-title="Full Name">
-                                <input type="text" name="row1_full_name" value="Vincent Williamson">
+                                {{ employee.full_name(class="form-control") }}
                             </div>
                             <div class="cell" data-title="Age">
-                                <input type="number" name="row1_age" value="31">
+                                {{ employee.age(class="form-control") }}
                             </div>
                             <div class="cell" data-title="Job Title">
-                                <input type="text" name="row1_job_title" value="iOS Developer">
+                                {{ employee.job_title(class="form-control") }}
                             </div>
                             <div class="cell" data-title="Location">
-                                <input type="text" name="row1_location" value="Washington">
+                                {{ employee.location(class="form-control") }}
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="cell" data-title="Full Name">Joseph Smith</div>
-                            <div class="cell" data-title="Age">27</div>
-                            <div class="cell" data-title="Job Title">Project Manager</div>
-                            <div class="cell" data-title="Location">Somerville, MA</div>
-                        </div>
-                        <div class="row">
-                            <div class="cell" data-title="Full Name">Justin Black</div>
-                            <div class="cell" data-title="Age">26</div>
-                            <div class="cell" data-title="Job Title">Front-End Developer</div>
-                            <div class="cell" data-title="Location">Los Angeles</div>
-                        </div>
-                    </form>
-                </div>
+                        {% endfor %}
+                    </div>
+                </form>
             </div>
         </div>
     </div>

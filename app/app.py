@@ -1,12 +1,16 @@
 import flask
 from flask import Flask, render_template, jsonify, request, g, redirect, send_file, url_for
-from wtforms import Form, StringField, IntegerField, validators
+from flask_wtf import FlaskForm, CSRFProtect
+from wtforms import FieldList, Form, FormField, SelectField, StringField, IntegerField, SubmitField
+from wtforms.validators import DataRequired, Length, NumberRange
 import pandas as pd
 import logging
 from datetime import datetime, date, timedelta
 import time
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'your-secret-key'
+csrf = CSRFProtect(app)
 
 datas = pd.DataFrame(
     data={'工番': [10, 20, 30, 40],
@@ -79,25 +83,62 @@ def table1():
 
 @app.route("/table2", methods=['GET'])
 def table2():
-    return render_template("table2.html")
+    f = EmployeeFormList()
+    return render_template("table2.html", form=f)
+
+@app.route('/validate', methods=['POST'])
+def validate():
+    print(request.form)
+    f = EmployeeFormList(request.form)
+    if f.validate():
+        return render_template('table3.html')
+    else:
+        return render_template('table2.html', form=f)
+
+@app.route('/add_row', methods=['POST'])
+def add_row():
+    employee_form = EmployeeForm()
+    rendered_form = render_template('employee_form.html', form=employee_form)
+    return jsonify({'form': rendered_form})
 
 @app.route("/table3", methods=['GET'])
 def table3():
     return render_template("table3.html")
 
+@app.route('/combobox', methods=['GET', 'POST'])
+def combobox():
+    form = ComboBoxForm()
+    if form.validate_on_submit():
+        print("Selected option:", form.options.data)
+        return redirect('/combobox')
+    return render_template('combobox.html', form=form)
+
+@app.route('/table_form', methods=['GET', 'POST'])
+def table_form():
+    form = TableForm()
+    if form.validate_on_submit():
+        rows = form.row.data
+        columns = form.column.data
+        return render_template('table.html', rows=rows, columns=columns)
+    return render_template('table_form.html', form=form)
+
+class TableForm(FlaskForm):
+    row = IntegerField('Number of Rows', validators=[DataRequired()])
+    column = IntegerField('Number of Columns', validators=[DataRequired()])
+    submit = SubmitField('Create Table')
+   
+class ComboBoxForm(FlaskForm):
+    options = SelectField('Options', choices=[('1', 'Option 1'), ('2', 'Option 2'), ('3', 'Option 3')])
+
 class EmployeeForm(Form):
-    full_name = StringField('Full Name', [validators.Length(min=1, max=50, message="Full Name must be between 1 and 50 characters")])
-    age = IntegerField('Age', [validators.NumberRange(min=18, max=65, message="Age must be between 18 and 65")])
-    job_title = StringField('Job Title', [validators.Length(min=1, max=50, message="Job Title must be between 1 and 50 characters")])
-    location = StringField('Location', [validators.Length(min=1, max=100, message="Location must be between 1 and 100 characters")])
+    full_name = StringField('Full Name', [Length(min=1, max=50, message="Full Name must be between 1 and 50 characters")])
+    age = IntegerField('Age', [NumberRange(min=18, max=65, message="Age must be between 18 and 65")])
+    job_title = StringField('Job Title', [Length(min=1, max=50, message="Job Title must be between 1 and 50 characters")])
+    location = StringField('Location', [Length(min=1, max=100, message="Location must be between 1 and 100 characters")])
     
-@app.route('/validate', methods=['POST'])
-def validate():
-    form = EmployeeForm(request.form)
-    if form.validate():
-        return "Validated"
-    else:
-        return "Validation failed"
+class EmployeeFormList(FlaskForm):
+    employees = FieldList(FormField(EmployeeForm), min_entries=1)
+
    
 if __name__ == '__main__':
     app.run(debug=False, host='127.0.0.1', port=80)
