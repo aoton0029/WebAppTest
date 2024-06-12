@@ -7,10 +7,14 @@ import pandas as pd
 import logging
 from datetime import datetime, date, timedelta
 import time
+from seizo import seizo
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-secret-key'
 csrf = CSRFProtect(app)
+
+app.register_blueprint(seizo, url_prefix='/seizo')  # Blueprintをアプリに登録
+
 
 datas = pd.DataFrame(
     data={'工番': [10, 20, 30, 40],

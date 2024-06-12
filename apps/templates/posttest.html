@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block main %}
+<body>
+    <form id="myForm" action="{{url_for('seizo.posttest')}}" method="post">
+        {{ form.hidden_tag() }}
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const myForm = document.getElementById('myForm');
+            const formData = new FormData();
+            formData.append('name', '名前');
+            formData.append('email', 'メールアドレス');
+            fetch(myForm.action, {
+                method: 'POST',
+                body: formData
+            }).then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            }).then(data => {
+                console.log('Success:', data);
+            }).catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
+{% endblock %}
